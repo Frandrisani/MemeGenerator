@@ -9,14 +9,14 @@
   <body>
     <div class="container">
       <h1>Generatore di Meme</h1>
-      <p>Carica due foto e crea un meme random!</p>
-      <form id="memeForm" enctype="multipart/form-data">
+      <p>Carica una foto e crea un meme random</p>
+      <form id="memeForm">
         <input type="file" id="image1" accept="image/*" required />
-        <input type="file" id="image2" accept="image/*" required />
         <button type="submit">Genera Meme</button>
       </form>
       <div id="memeOutput" class="hidden">
-        <img id="memeImage" alt="Meme Generated" />
+        <img id="memeImage" alt="Meme generato" />
+        <a id="downloadLink" download="meme.png">Scarica Meme</a>
       </div>
     </div>
     <script src="script.js"></script>
