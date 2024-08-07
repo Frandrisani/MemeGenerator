@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generatore di Meme</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Generatore di Meme</h1>
+      <p>Carica due foto e crea un meme random!</p>
+      <form id="memeForm" enctype="multipart/form-data">
+        <input type="file" id="image1" accept="image/*" required />
+        <input type="file" id="image2" accept="image/*" required />
+        <button type="submit">Genera Meme</button>
+      </form>
+      <div id="memeOutput" class="hidden">
+        <img id="memeImage" alt="Meme Generated" />
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
