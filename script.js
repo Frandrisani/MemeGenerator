@@ -94,34 +94,36 @@ memeForm.addEventListener("submit", function (event) {
         const phrase = getRandomPhrase(phrases);
 
         // Stile del testo
-        ctx.font = "30px Impact";
+        ctx.font = "bold 30px Impact";
         ctx.fillStyle = "black"; // Colore del testo
         ctx.textAlign = "center";
-        ctx.textBaseline = "bottom"; // Allinea il testo al bordo inferiore dell'immagine
+        ctx.textBaseline = "top"; // Allinea il testo al bordo superiore
         ctx.shadowColor = "white"; // Colore dell'ombra per migliorare la visibilità
         ctx.shadowBlur = 5;
-        ctx.lineWidth = 2;
 
         // Spazio dal bordo inferiore dell'immagine
-        const textMargin = 20;
+        const textMargin = 30;
+        const maxWidth = canvas.width - 40; // Larghezza massima del testo
 
-        // Calcola l'altezza del testo
+        // Calcola l'altezza del testo e gestisce il testo a capo
         const lines = wrapText(
           ctx,
           phrase,
           canvas.width / 2,
           canvas.height - textMargin,
-          canvas.width - 20,
+          maxWidth,
           30
         );
-        const textHeight = lines * 30; // Assume una linea di altezza di 30px
 
         // Disegna il testo
-        ctx.fillText(
-          phrase,
-          canvas.width / 2,
-          canvas.height - textMargin - (lines - 1) * 30
-        );
+        const reversedLines = [...lines].reverse(); // Crea una copia invertita dell'array lines
+        reversedLines.forEach((line, index) => {
+          ctx.fillText(
+            line,
+            canvas.width / 2,
+            canvas.height - textMargin - index * 30
+          );
+        });
 
         // Imposta l'immagine del meme e il link per il download
         const dataURL = canvas.toDataURL();
@@ -153,20 +155,13 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
     const metrics = context.measureText(testLine);
     const testWidth = metrics.width;
     if (testWidth > maxWidth && n > 0) {
-      lines.push(line);
+      lines.push(line.trim());
       line = words[n] + " ";
     } else {
       line = testLine;
     }
   }
-  lines.push(line); // Aggiunge l'ultima riga
+  lines.push(line.trim()); // Aggiunge l'ultima riga
 
-  // Disegna il testo rientrando dal bordo sinistro
-  lines.forEach((line, index) => {
-    context.strokeText(line, x, y);
-    context.fillText(line, x, y);
-    y -= lineHeight; // Sposta il testo verso l'alto per la nuova linea
-  });
-
-  return lines.length; // Restituisce il numero di righe
+  return lines; // Restituisce le righe nel giusto ordine
 }
