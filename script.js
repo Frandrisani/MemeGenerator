@@ -102,7 +102,7 @@ memeForm.addEventListener("submit", function (event) {
         ctx.shadowBlur = 5;
 
         // Spazio dal bordo inferiore dell'immagine
-        const textMargin = 30;
+        const textMargin = 40;
         const maxWidth = canvas.width - 40; // Larghezza massima del testo
 
         // Calcola l'altezza del testo e gestisce il testo a capo
